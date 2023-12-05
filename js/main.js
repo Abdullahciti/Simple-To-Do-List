@@ -1,18 +1,28 @@
 const userTextArea = document.querySelector("textarea");
-const userTextAreaIcon = document.querySelector(".main-box i"); // <i class="fa-solid fa-plus"></i>
+const userTextAreaIcon = document.querySelector(".fa-list"); // <i class="fa-solid fa-plus"></i>
 const allListsUl = document.querySelector(".all-lists");
 const checkbox = document.querySelector(".todo-list input");
 const pendingTasks = document.querySelector(".pending-tasks");
 const myDeleteI = document.querySelector(".todo-list i");
 const clearButton = document.querySelector("button");
 
-
+userTextAreaIcon.addEventListener("click", (ele) => {
+    let areaVal = userTextArea.value.trim()
+        const liTag = ` <li class="todo-list pending" onclick="handleStatus(this)">
+        <input type="checkbox">
+        <span class="my-list">${areaVal}</span>
+        <i class="fa-solid fa-trash" onclick="deleteTask(this)" ></i>
+        </li> `
+        allListsUl.insertAdjacentHTML("beforeend", liTag);
+        userTextArea.value = "";
+        choosedTasks();
+})
 choosedTasks();
 userTextArea.addEventListener("keyup", (e) => {
 
     let areaVal = userTextArea.value.trim()
     
-    if(e.key === "Enter" && areaVal.length > 0 ){
+    if( e.key === "Enter" && areaVal.length > 0){
         const liTag = ` <li class="todo-list pending" onclick="handleStatus(this)">
         <input type="checkbox">
         <span class="my-list">${areaVal}</span>
